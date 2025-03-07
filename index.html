@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bottle Filling Game</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            border: 2px solid black;
+        }
+        .controls {
+            margin: 10px;
+        }
+        .ad-space {
+            margin-top: 20px;
+            height: 90px;
+            background: lightgray;
+            text-align: center;
+            line-height: 90px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bottle Filling Game</h1>
+    <div class="controls">
+        <label for="colorPicker">Choose Color:</label>
+        <input type="color" id="colorPicker">
+        <button onclick="resetGame()">Reset</button>
+    </div>
+    <canvas id="gameCanvas" width="400" height="500"></canvas>
+    <div class="ad-space">Ad Space</div>
+    
+    <script>
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        const colorPicker = document.getElementById("colorPicker");
+        let score = 0;
+        let fillColor = "#0000FF";
+        
+        colorPicker.addEventListener("change", function() {
+            fillColor = this.value;
+        });
+        
+        canvas.addEventListener("click", function(event) {
+            ctx.fillStyle = fillColor;
+            ctx.fillRect(150, 200 + score * 10, 100, 10);
+            score++;
+            if (score >= 20) {
+                alert("Level Complete!");
+                score = 0;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+        
+        function resetGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            score = 0;
+        }
+        
+        function redirect() {
+            window.open("https://example.com", "_blank");
+        }
+        
+        setInterval(redirect, 15000);
+    </script>
+</body>
+</html>
